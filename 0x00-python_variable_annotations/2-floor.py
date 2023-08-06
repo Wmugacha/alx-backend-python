@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+"""
+Module of a Floor function
+"""
 import math
-"""Module of a Floor function"""
 
 
 def floor(n: float) -> int:

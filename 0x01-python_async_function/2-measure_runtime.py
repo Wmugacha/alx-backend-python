@@ -11,10 +11,10 @@ async def measure_time(n: int, max_delay: int) -> float:
     """Multiple Coroutines"""
     start = time.time()
 
-    asyncio.run(wait_n(n, max_delay))
+    await wait_n(n, max_delay)
 
     end = time.time()
 
-    exec_time = end - start
+    exec_time = (end - start) / n
 
-    return exec_time / n
+    return exec_time

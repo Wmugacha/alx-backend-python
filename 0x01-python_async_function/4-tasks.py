@@ -3,6 +3,7 @@
 Module to run Wait_random n times
 """
 from typing import List
+from heapq import nsmallest
 import asyncio
 task_wait_random = __import__('3-tasks').task_wait_random
 
@@ -15,4 +16,4 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
 
     await asyncio.sleep(1)
 
-    return sorted(results)
+    return nsmallest(n, results)

@@ -12,11 +12,10 @@ async def measure_runtime() -> float:
     """Coroutine to call another"""
     start = time.time()
 
-    for _ in range(4):
-        await async_comprehension()
+    await asyncio.gather(*(async_comprehension() for i in range(4)))
 
     end = time.time()
 
-    exec_time = (end - start) / 4
+    exec_time = (end - start)
 
     return exec_time

@@ -13,6 +13,6 @@ async def async_generator() -> AsyncGenerator[float, None]:
     for _ in range(10):
         random_num = random.uniform(1, 10)
 
-        yield random_num
-
         await asyncio.sleep(1)
+
+        yield random_num

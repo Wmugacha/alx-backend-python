@@ -11,15 +11,15 @@ def connect_db():
     print("Connected Successfully!!")
     return conn
 
-def lazy_paginate(page_size):
+def paginate_users(page_size, offset):
     conn = connect_db()
     cursor = conn.cursor()
-    offset = 0
+    query = "SELECT user_id, name, email, age FROM user_data LIMIT %s OFFSET %s"
+    cursor.execute(query, (page_size, offset))
+    return cursor.fetchall()
 
-    def paginate_users(page_size, offset):
-        query = "SELECT user_id, name, email, age FROM user_data LIMIT %s OFFSET %s"
-        cursor.execute(query, (page_size, offset))
-        return cursor.fetchall()
+def lazy_paginate(page_size):
+    offset = 0
 
     while True:
         page = paginate_users(page_size, offset)

@@ -1,12 +1,14 @@
 import sqlite3
 import functools
+import datetime
 
 #### decorator to lof SQL queries
 
  """ YOUR CODE GOES HERE"""
 def log_queries():
-    conn.set_trace_callback(print)
-        
+    time_log = date.datetime.now()
+    query_log = conn.set_trace_callback(print)
+    print(f"{time_log} : {query_log}")
 
 
 @log_queries

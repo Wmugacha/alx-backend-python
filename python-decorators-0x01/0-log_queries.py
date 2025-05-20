@@ -2,14 +2,21 @@ import sqlite3
 import functools
 from datetime import datetime
 
-#### decorator to lof SQL queries
+#Decorator to lof SQL queries
+def log_queries(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        def logger(statement):
+            print(f"{datetime.now()} : Executing SQL: {Statement}")
 
- """ YOUR CODE GOES HERE"""
-def log_queries():
-    time_log = date.datetime.now()
-    query_log = conn.set_trace_callback(print)
-    print(f"{time_log} : {query_log}")
-
+        conn = sqlite3.connect("users.db")
+        conn.set.trace_callback(logger)
+        
+        try:
+            return func(conn, *args, **kwargs)
+        finally:
+            conn.close()
+    return wrapper
 
 @log_queries
 def fetch_all_users(query):

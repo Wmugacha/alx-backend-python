@@ -14,7 +14,18 @@ def with_db_connection(func):
 
 query_cache = {}
 
-"""your code goes here"""
+def cache_query(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        query = args[1]
+        if query in query_cache:
+            print("Using Cached Result")
+            return query_cache[query]
+        result = func(*args, **kwargs)
+        query_cache[query] = result
+        print("Result has been cached!")
+        return result
+    return wrapper
 
 @with_db_connection
 @cache_query

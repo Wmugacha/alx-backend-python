@@ -12,7 +12,7 @@ async def async_fetch_older_users():
         async with db.execute("SELECT * FROM users WHERE age > 40") as cursor:
             return await cursor.fetchall()
 
-async def main():
+async def fetch_concurrently():
     results = await asyncio.gather(
         async_fetch_users(), async_fetch_older_users()
     )
@@ -21,4 +21,4 @@ async def main():
     print("Older users:", older_users)
 
 if __name__ == "__main__":
-   asyncio.run(main())
+   asyncio.run(fetch_concurrently())

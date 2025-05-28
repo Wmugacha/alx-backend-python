@@ -63,7 +63,7 @@ class TestGetJson(unittest.TestCase):
         Tests that `get_json` returns the expected JSON payload
         for given URLs by mocking `requests.get`.
         """
-        # Use patch as a context manager to mock 'requests.get' in the 'utils' module.
+        # Use patch as a context manager to mock 'requests.get'
         with patch('utils.requests.get') as mock_get:
             # Create a mock response object and configure its json() method
             # to return the desired test_payload.
@@ -77,7 +77,7 @@ class TestGetJson(unittest.TestCase):
 
             # Assert that the function returned the expected payload.
             self.assertEqual(result, test_payload)
-            # Verify that 'requests.get' was called exactly once with the correct URL.
+            # Verify that 'requests.get' was called exactly once.
             mock_get.assert_called_once_with(test_url)
 
 
@@ -92,12 +92,12 @@ class TestMemoize(unittest.TestCase):
     def test_memoize(self):
         """
         Tests that the `memoize` decorator caches the result of a method call,
-        ensuring the decorated method's underlying dependency is only called once.
+        while ensuring the decorated method is only called once.
         """
         class TestClass:
             """
             A nested class used to test the `memoize` decorator's behavior
-            on a method (`a_property`) that relies on another method (`a_method`).
+            on (`a_property`) that relies on (`a_method`).
             """
             def a_method(self):
                 """
@@ -133,8 +133,8 @@ class TestMemoize(unittest.TestCase):
             mock_a_method.reset_mock()
 
             # Second call to the memoized property/method.
-            # This should retrieve the result from the cache and NOT call 'a_method'.
+            # This should get the result from the cache and NOT call a_method.
             second_result = test_obj.a_property
             self.assertEqual(second_result, "mocked_result")
-            # Assert that 'a_method' was NOT called this time, confirming memoization.
+            # Assert that 'a_method' was NOT called this time.
             mock_a_method.assert_not_called()

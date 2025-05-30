@@ -46,3 +46,24 @@ class TestGithubOrgClient(unittest.TestCase):
             
             self.assertEqual(client._public_repos_url, "mocked_url")
             mock_property.assert_called_once()
+
+    def test_public_repos(self):
+        mock_org_data = {
+            "login": "test_org",
+            "repos_url": "https://api.github.com/orgs/test_org/repos"
+            }
+        mock_repos_payload = [
+            {"name": "repo1", "license": {"key": "mit"}},
+            {"name": "repo2", "license": {"key": "apache-2.0"}},
+            {"name": "repo3", "license": None}
+            ]
+
+        with patch('client.get_json') as mock_get_json:
+            mock_get_json.side_effect = [mock_org_data, mock_repos_payload]
+
+            client = GithubOrgClient("test_org")
+
+            result = client.public_repos()
+
+            self.assertEqual(result, ["repo1", "repo2", "repo3"])
+            self.assertEqual(mock_get_json.call_count, 2)

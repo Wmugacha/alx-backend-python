@@ -39,7 +39,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_url(self):
 
-        with patch.object(GithubOrgClient, '_public_repos_url', new_callable=PropertyMock ) as mock_property:
+        with patch.object(GithubOrgClient, '_public_repos_url', new_callable=PropertyMock) as mock_property:
             mock_property.return_value = "mocked_url"
 
             client = GithubOrgClient("test_org")
@@ -47,23 +47,22 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(client._public_repos_url, "mocked_url")
             mock_property.assert_called_once()
 
-    def test_public_repos(self):
-        mock_org_data = {
-            "login": "test_org",
-            "repos_url": "https://api.github.com/orgs/test_org/repos"
-            }
-        mock_repos_payload = [
+    @patch('client.get_json')
+    def test_public_repos(self, mock_get_json):
+        mock_get_json.return_value = [
             {"name": "repo1", "license": {"key": "mit"}},
             {"name": "repo2", "license": {"key": "apache-2.0"}},
             {"name": "repo3", "license": None}
             ]
 
-        with patch('client.get_json') as mock_get_json:
-            mock_get_json.side_effect = [mock_org_data, mock_repos_payload]
+        with patch.object(GithubOrgClient, '_public_repos_url', new_callable=PropertyMock) as mock_url:
+            mock_url.return_value = "https://api.github.com/orgs/abc"
 
             client = GithubOrgClient("test_org")
 
             result = client.public_repos()
 
             self.assertEqual(result, ["repo1", "repo2", "repo3"])
-            self.assertEqual(mock_get_json.call_count, 2)
+
+            mock_get_json.assert_called_once_with("https://api.github.com/orgs/abc")
+            mock_url.assert_called_once()

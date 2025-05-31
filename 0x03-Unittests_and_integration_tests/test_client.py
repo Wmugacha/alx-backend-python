@@ -129,6 +129,9 @@ class TestGithubOrgClient(unittest.TestCase):
 
         def test_public_repos(self):
             self.assertEqual(self.client.public_repos(), self.expected_repos)
+
+        def test_public_repos_with_license(self):
+            self.assertEqual(self.client.public_repos(license="apache-2.0"), self.apache2_repos)
             
         @classmethod
         def tearDownClass(cls):

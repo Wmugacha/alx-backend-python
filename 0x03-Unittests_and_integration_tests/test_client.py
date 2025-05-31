@@ -93,7 +93,6 @@ class TestGithubOrgClient(unittest.TestCase):
             )
             mock_url.assert_called_once()
 
-    
     @parameterized.expand([
         ({"license": {"key": "my_license"}}, "my_license", True),
         ({"license": {"key": "other_license"}}, "my_license", False)
@@ -104,13 +103,12 @@ class TestGithubOrgClient(unittest.TestCase):
         result = client.has_license(repo, license_key)
         self.assertEqual(result, expected)
 
-    
     @parameterized_class([
         {
-        "org_payload": org,
-        "repos_payload": repos,
-        "expected_repos": expected,
-        "apache2_repos": apache2
+            "org_payload": org,
+            "repos_payload": repos,
+            "expected_repos": expected,
+            "apache2_repos": apache2
         }
         for org, repos, expected, apache2 in TEST_PAYLOAD
     ])
@@ -128,11 +126,15 @@ class TestGithubOrgClient(unittest.TestCase):
             cls.client = GithubOrgClient("abc")
 
         def test_public_repos(self):
+            """Test that public_repos returns all repo names correctly"""
             self.assertEqual(self.client.public_repos(), self.expected_repos)
 
         def test_public_repos_with_license(self):
-            self.assertEqual(self.client.public_repos(license="apache-2.0"), self.apache2_repos)
-            
+            """Test that public_repos filters repos by license"""
+            self.assertEqual(
+                self.client.public_repos(license="apache-2.0"),
+                self.apache2_repos)
+
         @classmethod
         def tearDownClass(cls):
             print("Destroying Test Data")

@@ -113,9 +113,19 @@ class TestGithubOrgClient(unittest.TestCase):
         for org, repos, expected, apache2 in TEST_PAYLOAD
     ])
     class TestIntegrationGithubOrgClient(unittest.TestCase):
+        """
+        Performs integration tests for the `GithubOrgClient` class.
+
+        This test class uses `parameterized_class` to run the same tests
+        with different sets of mock data (payloads) defined in `TEST_PAYLOAD`.
+        It mocks network requests to simulate GitHub API responses.
+        """
         @classmethod
         def setUpClass(cls):
-            print("Setting up Test Data")
+            """
+            Sets up the mock for `requests.get` before
+            any tests in this class run.
+            """
             cls.get_patcher = patch('requests.get')
             mock_get = cls.get_patcher.start()
 
@@ -137,6 +147,9 @@ class TestGithubOrgClient(unittest.TestCase):
 
         @classmethod
         def tearDownClass(cls):
-            print("Destroying Test Data")
+            """
+            Stops the `requests.get` patcher after
+            all tests in this class have run.
+            """
             cls.get_patcher.stop()
             del cls.client

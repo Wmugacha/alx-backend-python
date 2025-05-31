@@ -6,6 +6,7 @@ from django.conf import settings
 class CustomUser(AbstractUser):
     user_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
+    password = models.CharField(max_length=128)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

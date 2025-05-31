@@ -2,9 +2,22 @@ from rest_framework import serializers
 from .models import CustomUser, Conversation, Message
 
 class UserSerializer(serializers.ModelSerializer):
+    full_name = serializers.SerializerMethodField()
+
+    phone_number = serializers.CharField()
+
+
     class Meta:
         model = CustomUser
         fields = ['user_id', 'username', 'email', 'first_name', 'last_name', 'phone_number']
+
+    def get_full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+
+    def validate_phone_number(self, value):
+        if not value.startswith('+'):
+            raise serializers.ValidationError("Phone number must start with '+'.")
+        return value
 
 class ConversationSerializer(serializers.ModelSerializer):
     participants = UserSerializer(many=True, read_only=True)

@@ -3,9 +3,10 @@
 
 import unittest
 from unittest.mock import patch, PropertyMock
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 
 from client import GithubOrgClient
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -102,3 +103,35 @@ class TestGithubOrgClient(unittest.TestCase):
 
         result = client.has_license(repo, license_key)
         self.assertEqual(result, expected)
+
+    
+    @parameterized_class([
+        {
+        "org_payload": org,
+        "repos_payload": repos,
+        "expected_repos": expected,
+        "apache2_repos": apache2
+        }
+        for org, repos, expected, apache2 in TEST_PAYLOAD
+    ])
+    class TestIntegrationGithubOrgClient(unittest.TestCase):
+        @classmethod
+        def setUpClass(cls):
+            print("Setting up Test Data")
+            cls.get_patcher = patch('requests.get')
+            mock_get = cls.get_patcher.start()
+
+            mock_get.return_value.json.side_effect = [
+                cls.org_payload,
+                cls.repos_payload
+            ]
+            cls.client = GithubOrgClient("abc")
+
+        def test_public_repos(self):
+            self.assertEqual(self.client.public_repos(), self.expected_repos)
+            
+        @classmethod
+        def tearDownClass(cls):
+            print("Destroying Test Data")
+            cls.get_patcher.stop()
+            del cls.client

@@ -9,7 +9,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ['user_id', 'username', 'email', 'first_name', 'last_name', 'phone_number']
+        fields = ['user_id', 'username', 'email', 'first_name', 'last_name', 'phone_number', 'full_name']
 
     def get_full_name(self, obj):
         return f"{obj.first_name} {obj.last_name}"
@@ -19,15 +19,16 @@ class UserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Phone number must start with '+'.")
         return value
 
+class MessageSerializer(serializers.ModelSerializer):
+    sender = UserSerializer(read_only=True)
+    class Meta:
+        model = Message
+        fields = ['message_id', 'conversation', 'sender', 'message_body', 'sent_at']
+
+
 class ConversationSerializer(serializers.ModelSerializer):
     participants = UserSerializer(many=True, read_only=True)
     messages = MessageSerializer(many=True, read_only=True)
     class Meta:
         model = Conversation
         fields = ['conversation_id', 'participants', 'created_at']
-
-class MessageSerializer(serializers.ModelSerializer):
-    sender = UserSerializer(read_only=True)
-    class Meta:
-        model = Message
-        fields = ['message_id', 'conversation', 'sender', 'message_body', 'sent_at']

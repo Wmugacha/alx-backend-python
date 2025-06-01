@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import CustomUser, Message, Conversation
 from .serializers import UserSerializer, MessageSerializer, ConversationSerializer
+from django_filters.rest_framework import DjangoFilterBackend
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by('last_name', 'first_name')
@@ -12,6 +13,9 @@ class UserViewSet(viewsets.ModelViewSet):
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['sender', 'conversation']
+
 
     def create(self, request, *args, **kwargs):
         conversation_id = request.data.get("conversation")
@@ -35,6 +39,8 @@ class MessageViewSet(viewsets.ModelViewSet):
 class ConversationViewSet(viewsets.ModelViewSet):
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['participants']
 
     def create(self, request, *args, **kwargs):
         user_ids = request.data.get("participants")

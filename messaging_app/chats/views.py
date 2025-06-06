@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from .models import CustomUser, Message, Conversation
 from .serializers import UserSerializer, MessageSerializer, ConversationSerializer, UserRegisterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+from .permissions import IsMessageOwner, ConversationOwner
 
 
 class UserRegisterAPIView(generics.CreateAPIView):
@@ -22,6 +23,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['sender', 'conversation']
+    permission_classes = [IsMessageOwner]
 
 
     def create(self, request, *args, **kwargs):
@@ -49,6 +51,7 @@ class ConversationViewSet(viewsets.ModelViewSet):
     serializer_class = ConversationSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['participants']
+    permission_classes = [ConversationOwner]
 
     def create(self, request, *args, **kwargs):
         user_ids = request.data.get("participants")

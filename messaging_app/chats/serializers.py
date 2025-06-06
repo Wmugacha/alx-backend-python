@@ -1,11 +1,39 @@
 from rest_framework import serializers
 from .models import CustomUser, Conversation, Message
+from django.contrib.auth.password_validation import validate_password
+
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+    confirm_password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'password', 'confirm_password']
+
+    def validate(self, attrs):
+        if attrs['password'] != attrs['confirm_password']:
+            raise serializers.ValidationError({"Password": "do not match!!"})
+
+        if CustomUser.objects.filter(username=attrs['username']).exists():
+            raise serializers.ValidationError({"username": "already exists"})
+
+        return attrs
+
+    def create(self, validated_data):
+        validated_data.pop('confirm_password')
+        user = CustomUser.objects.create_user(
+            username=validated_data['username'],
+            email=validated_data.get('email'),
+            password=validated_data['password']
+        )
+        return user
+
 
 class UserSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField()
 
     phone_number = serializers.CharField()
-
 
     class Meta:
         model = CustomUser

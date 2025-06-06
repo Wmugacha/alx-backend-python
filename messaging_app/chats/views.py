@@ -1,10 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import CustomUser, Message, Conversation
-from .serializers import UserSerializer, MessageSerializer, ConversationSerializer
+from .serializers import UserSerializer, MessageSerializer, ConversationSerializer, UserRegisterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
+
+
+class UserRegisterAPIView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserRegisterSerializer
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all().order_by('last_name', 'first_name')

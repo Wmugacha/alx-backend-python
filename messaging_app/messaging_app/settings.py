@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import datetime
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
     'rest_framework',
+    'rest_framework_simplejwt',
     'chats',
     'accounts',
     'django_filters',
@@ -128,13 +132,55 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend']
+}
+
+SIMPLE_JWT = {
+    # How long access tokens remain valid
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+    
+    # How long refresh tokens remain valid
+    'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
+    
+    # Whether refresh tokens rotate (get replaced when used)
+    'ROTATE_REFRESH_TOKENS': True,
+    
+    # Whether to blacklist refresh tokens after rotation
+    'BLACKLIST_AFTER_ROTATION': True,
+    
+    # The signing algorithm
+    'ALGORITHM': 'HS256',
+    
+    # The signing key (uses Django's SECRET_KEY by default)
+    'SIGNING_KEY': None,  # Will use settings.SECRET_KEY
+    
+    # Token prefix in the Authorization header
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    
+    # User ID field and claim
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+    
+    # Whether to include some user info in the token
+    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
+    
+    # Token types
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
+    
+    # Sliding tokens (alternative to access/refresh pattern)
+    'SLIDING_TOKEN_LIFETIME': datetime.timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': datetime.timedelta(days=7),
 }
 
 AUTH_USER_MODEL = 'chats.CustomUser'

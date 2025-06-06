@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import CustomUser, Conversation, Message
 from django.contrib.auth.password_validation import validate_password
+from .auth import get_tokens_for_user
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -27,7 +28,14 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             email=validated_data.get('email'),
             password=validated_data['password']
         )
-        return user
+
+        token = get_tokens_for_user()
+        return {
+            "user": user,
+            "tokens": tokens
+        }
+
+
 
 
 class UserSerializer(serializers.ModelSerializer):

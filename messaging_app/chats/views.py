@@ -2,15 +2,31 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from .models import CustomUser, Message, Conversation
 from .serializers import UserSerializer, MessageSerializer, ConversationSerializer, UserRegisterSerializer
 from django_filters.rest_framework import DjangoFilterBackend
-from .permissions import IsMessageOwner, ConversationOwner
+from .permissions import IsMessageOwner, IsParticipantOfConversation
+from .auth import get_tokens_for_user
 
 
 class UserRegisterAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserRegisterSerializer
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.save()
+
+        token = get_tokens_for_user(user)
+        response_data = {
+            'user': serializer.data,
+            'tokens': token
+        }
+
+        return Response(response_data, status=status.HTTP_201_CREATED)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -23,7 +39,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['sender', 'conversation']
-    permission_classes = [IsMessageOwner]
+    permission_classes = [IsMessageOwner, IsAuthenticated]
 
 
     def create(self, request, *args, **kwargs):
@@ -51,7 +67,7 @@ class ConversationViewSet(viewsets.ModelViewSet):
     serializer_class = ConversationSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['participants']
-    permission_classes = [ConversationOwner]
+    permission_classes = [IsParticipantOfConversation, IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         user_ids = request.data.get("participants")

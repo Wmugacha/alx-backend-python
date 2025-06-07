@@ -160,15 +160,14 @@ SIMPLE_JWT = {
     'ALGORITHM': 'HS256',
     
     # The signing key (uses Django's SECRET_KEY by default)
-    'SIGNING_KEY': None,  # Will use settings.SECRET_KEY
+    'SIGNING_KEY': SECRET_KEY,  # Will use settings.SECRET_KEY
     
     # Token prefix in the Authorization header
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     
     # User ID field and claim
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
+    'USER_ID_FIELD': 'user_id',
     
     # Whether to include some user info in the token
     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',

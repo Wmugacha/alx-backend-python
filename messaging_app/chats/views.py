@@ -8,7 +8,8 @@ from .serializers import UserSerializer, MessageSerializer, ConversationSerializ
 from django_filters.rest_framework import DjangoFilterBackend
 from .permissions import IsMessageOwner, IsParticipantOfConversation
 from .auth import get_tokens_for_user
-
+from .pagination import MessagePagination
+from .filters import MessageFilter
 
 class UserRegisterAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
@@ -38,8 +39,9 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['sender', 'conversation']
+    filterset_class = MessageFilter
     permission_classes = [IsMessageOwner, IsAuthenticated]
+    pagination_class = MessagePagination
 
     def get_queryset(self):
         return Message.objects.filter(sender=self.request.user)

@@ -41,6 +41,9 @@ class MessageViewSet(viewsets.ModelViewSet):
     filterset_fields = ['sender', 'conversation']
     permission_classes = [IsMessageOwner, IsAuthenticated]
 
+    def get_queryset(self):
+        return Message.objects.filter(sender=self.request.user)
+
 
     def create(self, request, *args, **kwargs):
         conversation_id = request.data.get("conversation")
@@ -48,7 +51,7 @@ class MessageViewSet(viewsets.ModelViewSet):
 
         if not conversation_id or not message_body:
             return Response({"error": "conversation and message_body are required"}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
         conversation = get_object_or_404(Conversation, conversation_id=conversation_id)
         sender = request.user
 
@@ -69,10 +72,17 @@ class ConversationViewSet(viewsets.ModelViewSet):
     filterset_fields = ['participants']
     permission_classes = [IsParticipantOfConversation, IsAuthenticated]
 
+    def get_queryset(self):
+        return Conversation.objects.filter(participants=self.request.user)
+
     def create(self, request, *args, **kwargs):
         user_ids = request.data.get("participants")
         if not user_ids or not isinstance(user_ids, list):
             return Response({"error": "participants must be a list of user_ids"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if request.user not in conversation.participants.all():
+            return Response({"error": "You are not a participant of this conversation."}, status=status.HTTP_403_FORBIDDEN)
+
 
         conversation= Conversation.objects.create()
         conversation.participants.set(user_ids)

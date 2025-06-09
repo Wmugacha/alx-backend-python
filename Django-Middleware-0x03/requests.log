@@ -8,3 +8,61 @@ INFO 2025-06-09 04:07:38,877 chats.middleware 25527 140126663472896 2025-06-09 0
 INFO 2025-06-09 04:07:54,768 chats.middleware 25527 140126663472896 2025-06-09 04:07:54.768715 - User:   - Path: /api/
 INFO 2025-06-09 04:08:09,177 chats.middleware 25527 140126663472896 2025-06-09 04:08:09.177769 - User:   - Path: /api/users/
 INFO 2025-06-09 04:08:33,027 chats.middleware 25527 140126655080192 2025-06-09 04:08:33.027258 - User:   - Path: /api/users/
+INFO 2025-06-09 08:43:16,049 django.utils.autoreload 25527 140126777730880 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 08:43:23,521 django.utils.autoreload 59168 139803193534272 Watching for file changes with StatReloader
+INFO 2025-06-09 09:09:24,351 django.utils.autoreload 59168 139803193534272 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:09:25,705 django.utils.autoreload 60689 139945211123520 Watching for file changes with StatReloader
+INFO 2025-06-09 09:09:34,402 django.utils.autoreload 60689 139945211123520 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:09:35,058 django.utils.autoreload 60742 140156461016896 Watching for file changes with StatReloader
+INFO 2025-06-09 09:24:54,152 django.utils.autoreload 60742 140156461016896 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:24:54,709 django.utils.autoreload 62294 139882383370048 Watching for file changes with StatReloader
+INFO 2025-06-09 09:24:54,932 chats.middleware 62294 139882351908608 Request logging initialized
+INFO 2025-06-09 09:25:40,369 django.utils.autoreload 62294 139882383370048 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:25:40,958 django.utils.autoreload 62379 140258761516864 Watching for file changes with StatReloader
+INFO 2025-06-09 09:44:00,206 django.utils.autoreload 62379 140258761516864 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:44:00,747 django.utils.autoreload 64268 140681764280128 Watching for file changes with StatReloader
+INFO 2025-06-09 09:44:01,044 chats.middleware 64268 140681732818688 Request logging initialized
+INFO 2025-06-09 09:44:47,604 django.utils.autoreload 64268 140681764280128 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:44:48,142 django.utils.autoreload 64390 140443226081088 Watching for file changes with StatReloader
+INFO 2025-06-09 09:44:48,396 chats.middleware 64390 140443194619648 Request logging initialized
+INFO 2025-06-09 09:54:07,311 django.utils.autoreload 64390 140443226081088 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/messaging_app/settings.py changed, reloading.
+INFO 2025-06-09 09:54:08,014 django.utils.autoreload 65342 140399230166848 Watching for file changes with StatReloader
+INFO 2025-06-09 09:54:08,326 chats.middleware 65342 140399198705408 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 09:54:08,326 chats.middleware 65342 140399198705408 Request logging initialized
+INFO 2025-06-09 09:57:23,112 django.utils.autoreload 65342 140399230166848 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:57:23,793 django.utils.autoreload 65702 140304178980672 Watching for file changes with StatReloader
+INFO 2025-06-09 09:57:24,076 chats.middleware 65702 140304147519232 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 09:57:24,077 chats.middleware 65702 140304147519232 Request logging initialized
+INFO 2025-06-09 09:58:50,236 django.utils.autoreload 65702 140304178980672 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:58:50,767 django.utils.autoreload 65907 140327614965568 Watching for file changes with StatReloader
+INFO 2025-06-09 09:58:51,041 chats.middleware 65907 140327583504128 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 09:58:51,042 chats.middleware 65907 140327583504128 Request logging initialized
+INFO 2025-06-09 09:59:16,095 django.utils.autoreload 65907 140327614965568 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 09:59:16,697 django.utils.autoreload 65968 139630734022464 Watching for file changes with StatReloader
+INFO 2025-06-09 09:59:17,070 chats.middleware 65968 139630702561024 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 09:59:17,071 chats.middleware 65968 139630702561024 Request logging initialized
+INFO 2025-06-09 10:05:11,062 django.utils.autoreload 65968 139630734022464 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 10:05:11,661 django.utils.autoreload 66599 140194035509056 Watching for file changes with StatReloader
+INFO 2025-06-09 10:05:11,916 chats.middleware 66599 140194004047616 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 10:05:11,917 chats.middleware 66599 140194004047616 Request logging initialized
+ERROR 2025-06-09 10:06:58,018 django.request 66599 140193990203136 Internal Server Error: /api/
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 45, in __call__
+    if not self.is_time_allowed(current_time):
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 40, in is_time_allowed
+    return self.start_time <= current_time <= self.end_time
+TypeError: '<=' not supported between instances of 'datetime.time' and 'builtin_function_or_method'
+INFO 2025-06-09 10:06:58,019 chats.middleware 66599 140193990203136 2025-06-09 10:06:58.019059+00:00 - User:   - Path: /api/
+INFO 2025-06-09 10:12:24,268 django.utils.autoreload 66599 140194035509056 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 10:12:24,929 django.utils.autoreload 67401 140166152890176 Watching for file changes with StatReloader
+INFO 2025-06-09 10:12:25,236 chats.middleware 67401 140166121428736 Time base access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 10:12:25,236 chats.middleware 67401 140166121428736 Request logging initialized
+INFO 2025-06-09 10:12:38,756 django.utils.autoreload 67401 140166152890176 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-09 10:12:39,273 django.utils.autoreload 67488 140541472847680 Watching for file changes with StatReloader
+INFO 2025-06-09 10:12:39,521 chats.middleware 67488 140541441386240 Time based access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-09 10:12:39,522 chats.middleware 67488 140541441386240 Request logging initialized
+WARNING 2025-06-09 10:12:56,078 chats.middleware 67488 140541427541760 Access denied at 10:12:56.078041 - Outside allowed hours
+INFO 2025-06-09 10:12:56,093 chats.middleware 67488 140541427541760 2025-06-09 10:12:56.093583+00:00 - User:   - Path: /api/
+WARNING 2025-06-09 10:12:56,094 django.request 67488 140541427541760 Forbidden: /api/

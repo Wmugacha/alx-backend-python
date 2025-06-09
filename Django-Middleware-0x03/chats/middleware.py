@@ -1,7 +1,8 @@
 import logging
 from datetime import datetime, time
 from django.utils import timezone
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
+from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
 
@@ -48,3 +49,42 @@ class RestrictAccessByTimeMiddleware:
         else:
             logger.debug(f"Granted access at: {current_time}")
             return self.get_response(request)
+
+
+class OffensiveLanguageMiddleware:
+    RATE_LIMIT = 5
+    WINDOW_SECONDS = 60
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.method == "POST" and request.path.startswith("/api/messages"):
+
+            ip = self.get_client_ip(request)
+
+            key = f"msg-rate-{ip}"
+
+            request_times = cache.get(key, [])
+
+            now = time.time()
+
+            request_times = [t for t in request_times if now - t < self.WINDOW_SECONDS]
+
+            if len(request_times) >= self.RATE_LIMIT:
+                return JsonResponse(
+                    {"detail": "Rate limit exceed. 5 messages allowed per minute"},
+                    status=429
+                )
+            request_times.append(now)
+
+        cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+
+        return self.get_response(request)
+
+    def get_client_ip(self, request):
+        x_forwaded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwaded_for:
+            return x_forwaded_for.split(',')[0].strip()
+
+        return request.META.get('REMOTE_ADDR')

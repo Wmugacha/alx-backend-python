@@ -1,0 +1,10 @@
+INFO 2025-06-09 04:05:36,120 django.utils.autoreload 25527 140126777730880 Watching for file changes with StatReloader
+INFO 2025-06-09 04:05:36,932 chats.middleware 25527 140126746269440 Request logging initialized
+INFO 2025-06-09 04:06:17,399 chats.middleware 25527 140126663472896 2025-06-09 04:06:17.399451 - User:   - Path: /api/
+INFO 2025-06-09 04:06:20,959 chats.middleware 25527 140126663472896 2025-06-09 04:06:20.959001 - User:   - Path: /api/users/
+INFO 2025-06-09 04:06:47,181 chats.middleware 25527 140126663472896 2025-06-09 04:06:47.181005 - User:   - Path: /api/
+INFO 2025-06-09 04:06:56,096 chats.middleware 25527 140126663472896 2025-06-09 04:06:56.096842 - User:   - Path: /api/users/
+INFO 2025-06-09 04:07:38,877 chats.middleware 25527 140126663472896 2025-06-09 04:07:38.877175 - User:   - Path: /api/users/
+INFO 2025-06-09 04:07:54,768 chats.middleware 25527 140126663472896 2025-06-09 04:07:54.768715 - User:   - Path: /api/
+INFO 2025-06-09 04:08:09,177 chats.middleware 25527 140126663472896 2025-06-09 04:08:09.177769 - User:   - Path: /api/users/
+INFO 2025-06-09 04:08:33,027 chats.middleware 25527 140126655080192 2025-06-09 04:08:33.027258 - User:   - Path: /api/users/

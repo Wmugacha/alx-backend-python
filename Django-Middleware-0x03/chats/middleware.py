@@ -78,7 +78,7 @@ class OffensiveLanguageMiddleware:
                 )
             request_times.append(now)
 
-        cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+            cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
 
         return self.get_response(request)
 

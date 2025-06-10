@@ -100,3 +100,94 @@ INFO 2025-06-09 13:55:38,365 django.utils.autoreload 90448 140701584115520 /home
 INFO 2025-06-09 13:55:39,064 django.utils.autoreload 91140 140642626168640 Watching for file changes with StatReloader
 INFO 2025-06-09 13:55:39,463 chats.middleware 91140 140642594707200 Time based access is in place: 18:00:00 to 21:00:00
 INFO 2025-06-09 13:55:39,464 chats.middleware 91140 140642594707200 Request logging initialized
+INFO 2025-06-10 03:51:00,208 django.utils.autoreload 3042 140303029040960 Watching for file changes with StatReloader
+INFO 2025-06-10 03:51:00,938 chats.middleware 3042 140302997579520 Time based access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-10 03:51:00,939 chats.middleware 3042 140302997579520 Request logging initialized
+INFO 2025-06-10 05:20:52,154 django.utils.autoreload 5891 139809390290752 Watching for file changes with StatReloader
+INFO 2025-06-10 05:20:52,476 chats.middleware 5891 139809358829312 Time based access is in place: 18:00:00 to 21:00:00
+INFO 2025-06-10 05:20:52,477 chats.middleware 5891 139809358829312 Request logging initialized
+WARNING 2025-06-10 05:21:03,025 chats.middleware 5891 139809344984832 Access denied at 05:21:03.025910 - Outside allowed hours
+INFO 2025-06-10 05:21:03,086 chats.middleware 5891 139809344984832 2025-06-10 05:21:03.086642+00:00 - User:   - Path: /
+WARNING 2025-06-10 05:21:03,087 django.request 5891 139809344984832 Forbidden: /
+WARNING 2025-06-10 05:21:04,287 chats.middleware 5891 139809344984832 Access denied at 05:21:04.287529 - Outside allowed hours
+INFO 2025-06-10 05:21:04,292 chats.middleware 5891 139809344984832 2025-06-10 05:21:04.292481+00:00 - User:   - Path: /favicon.ico
+WARNING 2025-06-10 05:21:04,293 django.request 5891 139809344984832 Forbidden: /favicon.ico
+INFO 2025-06-10 05:21:26,175 django.utils.autoreload 5891 139809390290752 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/messaging_app/settings.py changed, reloading.
+INFO 2025-06-10 05:21:26,804 django.utils.autoreload 6024 140711135012672 Watching for file changes with StatReloader
+INFO 2025-06-10 05:21:27,096 chats.middleware 6024 140711103551232 Request logging initialized
+ERROR 2025-06-10 05:21:32,336 django.request 6024 140711081314048 Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:21:32,337 chats.middleware 6024 140711081314048 2025-06-10 05:21:32.337684+00:00 - User:   - Path: /
+ERROR 2025-06-10 05:21:33,150 django.request 6024 140711081314048 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:21:33,151 chats.middleware 6024 140711081314048 2025-06-10 05:21:33.151297+00:00 - User:   - Path: /favicon.ico
+ERROR 2025-06-10 05:21:50,579 django.request 6024 140711081314048 Internal Server Error: /api/
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:21:50,580 chats.middleware 6024 140711081314048 2025-06-10 05:21:50.580104+00:00 - User:   - Path: /api/
+ERROR 2025-06-10 05:21:51,074 django.request 6024 140711081314048 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:21:51,074 chats.middleware 6024 140711081314048 2025-06-10 05:21:51.074733+00:00 - User:   - Path: /favicon.ico
+INFO 2025-06-10 05:26:05,164 django.utils.autoreload 6415 139873198671680 Watching for file changes with StatReloader
+INFO 2025-06-10 05:26:05,387 chats.middleware 6415 139873167210240 Request logging initialized
+ERROR 2025-06-10 05:26:11,439 django.request 6415 139873144973056 Internal Server Error: /
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:26:11,440 chats.middleware 6415 139873144973056 2025-06-10 05:26:11.440439+00:00 - User:   - Path: /
+ERROR 2025-06-10 05:26:12,846 django.request 6415 139873144973056 Internal Server Error: /favicon.ico
+Traceback (most recent call last):
+  File "/home/alxprodev/alx-backend-python/messaging_app/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py", line 81, in __call__
+    cache.set(key, request_times, timeout=self.WINDOW_SECONDS)
+UnboundLocalError: local variable 'key' referenced before assignment
+INFO 2025-06-10 05:26:12,846 chats.middleware 6415 139873144973056 2025-06-10 05:26:12.846850+00:00 - User:   - Path: /favicon.ico
+INFO 2025-06-10 05:34:33,919 django.utils.autoreload 6415 139873198671680 /home/alxprodev/alx-backend-python/Django-Middleware-0x03/chats/middleware.py changed, reloading.
+INFO 2025-06-10 05:34:34,560 django.utils.autoreload 6883 139948377245504 Watching for file changes with StatReloader
+INFO 2025-06-10 05:34:34,897 chats.middleware 6883 139948345784064 Request logging initialized
+INFO 2025-06-10 05:34:40,981 chats.middleware 6883 139948331939584 2025-06-10 05:34:40.981559+00:00 - User:   - Path: /
+WARNING 2025-06-10 05:34:40,982 django.request 6883 139948331939584 Not Found: /
+INFO 2025-06-10 05:34:41,687 chats.middleware 6883 139948331939584 2025-06-10 05:34:41.687636+00:00 - User:   - Path: /favicon.ico
+WARNING 2025-06-10 05:34:41,698 django.request 6883 139948331939584 Not Found: /favicon.ico
+INFO 2025-06-10 05:34:48,719 chats.middleware 6883 139948331939584 2025-06-10 05:34:48.719376+00:00 - User:   - Path: /api/
+INFO 2025-06-10 05:34:51,101 chats.middleware 6883 139948323546880 2025-06-10 05:34:51.101136+00:00 - User:   - Path: /api/users/
+INFO 2025-06-10 05:35:22,497 chats.middleware 6883 139948323546880 2025-06-10 05:35:22.495455+00:00 - User:   - Path: /api/users/
+INFO 2025-06-10 05:35:35,482 chats.middleware 6883 139948323546880 2025-06-10 05:35:35.482140+00:00 - User:   - Path: /api/
+INFO 2025-06-10 05:35:37,401 chats.middleware 6883 139948323546880 2025-06-10 05:35:37.401101+00:00 - User:   - Path: /api/messages/
+INFO 2025-06-10 05:36:02,877 chats.middleware 6883 139948323546880 2025-06-10 05:36:02.877374+00:00 - User:   - Path: /api-auth/login/
+INFO 2025-06-10 05:39:57,798 django.utils.autoreload 7612 139810746156864 Watching for file changes with StatReloader
+INFO 2025-06-10 05:39:58,006 chats.middleware 7612 139810714695424 Request logging initialized
+INFO 2025-06-10 05:40:01,863 chats.middleware 7612 139810700850944 2025-06-10 05:40:01.863610+00:00 - User:   - Path: /api-auth/login/
+INFO 2025-06-10 05:40:14,334 chats.middleware 7612 139810700850944 2025-06-10 05:40:14.334120+00:00 - User:   - Path: /api-auth/login/
+INFO 2025-06-10 05:40:14,473 chats.middleware 7612 139810700850944 2025-06-10 05:40:14.473378+00:00 - User:   - Path: /api/
+INFO 2025-06-10 05:40:47,468 chats.middleware 7612 139810692458240 2025-06-10 05:40:47.468585+00:00 - User:   - Path: /api/users/
+INFO 2025-06-10 05:40:51,643 chats.middleware 7612 139810692458240 2025-06-10 05:40:51.643146+00:00 - User:   - Path: /api/
+INFO 2025-06-10 05:40:53,911 chats.middleware 7612 139810692458240 2025-06-10 05:40:53.911458+00:00 - User:   - Path: /api/messages/
+INFO 2025-06-10 05:41:17,534 chats.middleware 7612 139810700850944 2025-06-10 05:41:17.534167+00:00 - User:   - Path: /api/messages/
+INFO 2025-06-10 05:41:27,664 chats.middleware 7612 139810700850944 2025-06-10 05:41:27.664795+00:00 - User:   - Path: /api/
+INFO 2025-06-10 05:41:30,242 chats.middleware 7612 139810700850944 2025-06-10 05:41:30.242155+00:00 - User:   - Path: /api/conversations/
+INFO 2025-06-10 05:41:41,103 chats.middleware 7612 139810692458240 2025-06-10 05:41:41.103916+00:00 - User:   - Path: /api/conversations/
+INFO 2025-06-10 05:41:45,106 chats.middleware 7612 139810692458240 2025-06-10 05:41:45.106920+00:00 - User:   - Path: /api/conversations/

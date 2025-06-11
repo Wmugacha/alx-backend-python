@@ -3,7 +3,7 @@ from datetime import datetime, time
 from django.utils import timezone
 from django.http import HttpResponseForbidden, JsonResponse
 from django.core.cache import cache
-
+from django.urls import reverse
 logger = logging.getLogger(__name__)
 
 
@@ -88,3 +88,30 @@ class OffensiveLanguageMiddleware:
             return x_forwaded_for.split(',')[0].strip()
 
         return request.META.get('REMOTE_ADDR')
+
+
+class RolepermissionMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+        self.exempt_paths = [
+            "/admin/login/",
+            "/admin/logout/",
+            "/admin/", 
+            "/accounts/login/",
+        ]
+    def __call__(self, request):
+        if any(request.path.startswith(path) for path in self.exempt_paths):
+            return self.get_response(request)
+
+        if (
+            not request.user.is_authenticated or 
+            not (
+                request.user.groups.filter(name="Admin").exists() or
+                request.user.groups.filter(name="Moderator").exists()
+            )
+        ):
+            return HttpResponseForbidden("Only Admin or Moderator Level Access Allowed")
+
+        logger.info("User role is granted access")
+        return self.get_response(request)

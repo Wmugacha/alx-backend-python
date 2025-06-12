@@ -539,3 +539,22 @@ INFO 2025-06-11 02:39:00,870 chats.middleware 26550 139881324066560 User role is
 INFO 2025-06-11 02:39:00,913 chats.middleware 26550 139881324066560 2025-06-11 02:39:00.913124+00:00 - User:   - Path: /api/
 INFO 2025-06-11 02:39:04,821 chats.middleware 26550 139881324066560 User role is granted access
 INFO 2025-06-11 02:39:04,918 chats.middleware 26550 139881324066560 2025-06-11 02:39:04.918123+00:00 - User:   - Path: /api/users/
+INFO 2025-06-11 03:25:22,412 django.utils.autoreload 37836 140663992575808 Watching for file changes with StatReloader
+INFO 2025-06-11 03:25:22,969 chats.middleware 37836 140663961114368 Request logging initialized
+INFO 2025-06-11 03:25:29,526 chats.middleware 37836 140663869929216 User role is granted access
+INFO 2025-06-11 03:25:29,693 chats.middleware 37836 140663869929216 2025-06-11 03:25:29.692902+00:00 - User:   - Path: /
+WARNING 2025-06-11 03:25:29,694 django.request 37836 140663869929216 Not Found: /
+INFO 2025-06-11 03:25:36,928 chats.middleware 37836 140663869929216 User role is granted access
+INFO 2025-06-11 03:25:37,088 chats.middleware 37836 140663869929216 2025-06-11 03:25:37.088303+00:00 - User:   - Path: /api/
+INFO 2025-06-11 03:25:42,203 chats.middleware 37836 140663869929216 User role is granted access
+INFO 2025-06-11 03:25:42,243 chats.middleware 37836 140663869929216 2025-06-11 03:25:42.243415+00:00 - User: Anonymous - Path: /api-auth/logout/
+INFO 2025-06-11 03:25:42,264 chats.middleware 37836 140663869929216 2025-06-11 03:25:42.264407+00:00 - User: Anonymous - Path: /api/
+WARNING 2025-06-11 03:25:42,265 django.request 37836 140663869929216 Forbidden: /api/
+INFO 2025-06-11 03:25:49,116 chats.middleware 37836 140663947269888 2025-06-11 03:25:49.116570+00:00 - User: Anonymous - Path: /admin/
+INFO 2025-06-11 03:25:49,253 chats.middleware 37836 140663947269888 2025-06-11 03:25:49.253895+00:00 - User: Anonymous - Path: /admin/login/
+INFO 2025-06-11 03:25:55,516 chats.middleware 37836 140663947269888 2025-06-11 03:25:55.516146+00:00 - User:   - Path: /admin/login/
+INFO 2025-06-11 03:25:55,767 chats.middleware 37836 140663947269888 2025-06-11 03:25:55.766956+00:00 - User:   - Path: /admin/
+INFO 2025-06-11 03:26:04,390 chats.middleware 37836 140663947269888 User role is granted access
+INFO 2025-06-11 03:26:04,413 chats.middleware 37836 140663947269888 2025-06-11 03:26:04.413820+00:00 - User:   - Path: /api/
+INFO 2025-06-11 03:26:07,213 chats.middleware 37836 140663947269888 User role is granted access
+INFO 2025-06-11 03:26:07,906 chats.middleware 37836 140663947269888 2025-06-11 03:26:07.906283+00:00 - User:   - Path: /api/conversations/

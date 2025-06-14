@@ -6,6 +6,7 @@ class Message(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
     receiver = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='received_messages', null=True)
     content = models.TextField()
+    edited = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -15,11 +16,18 @@ class Message(models.Model):
         return f'Message from {self.sender} to {self.receiver} at {self.timestamp:}'
 
 
+class MessageHistory(models.Model):
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, related_name='history')
+    content = models.TextField()
+    edited_at = models.DateTimeField(auto_now_add=True)
+    edited_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='edited_message')
+
+
 class Notification(models.Model):
     notification_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications')
     sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='sent_notifications')
-    message = models.ForeignKey(Message, on_delete=CASCADE, null=True, blank=True)
+    message = models.ForeignKey(Message, on_delete=models.CASCADE, null=True, blank=True)
     is_read = models.BooleanField(default=False)
 
     NOTIFICATION_TYPES = (
@@ -36,4 +44,4 @@ class Notification(models.Model):
 
 
     def __str__(self):
-        return f"Noticication for {self.recipient.username} ({self.get_notification_type_display()})"
+        return f"Notification for {self.recipient.username} ({self.get_notification_type_display()})"

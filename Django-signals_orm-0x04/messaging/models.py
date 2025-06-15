@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .views import UnreadMessagesManager
 import uuid
 
 class Message(models.Model):
@@ -7,8 +8,12 @@ class Message(models.Model):
     receiver = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='received_messages', null=True)
     content = models.TextField()
     edited = models.BooleanField(default=False)
+    is_read = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
     parent_message = models.ForeignKey(self, on_delete=CASCADE, null=True, blank=True, related_name='replies')
+
+    objects = models.Manager
+    unread = UnreadMessagesManager()
 
     class Meta:
         ordering = ['-timestamp'] # To return new messages first during querying

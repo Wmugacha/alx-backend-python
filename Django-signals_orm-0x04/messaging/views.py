@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Message, Notification, MessageHistory
 from .serializers import UserSerializer, MessageSerializer, NotificationSerializer, MessageHistorySerializer
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -18,15 +19,18 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        return Message.objects.filter(sender=self.request.user).select_related('sender', 'receiver').prefetch_related('replies')
+        return Message.objects.filter(sender=self.request.user)
+
+def inbox(request):
+        messages = Message.objects.filter(sender=request.user).select_related('sender', 'receiver').prefetch_related('replies')
+        serializer = MessageSerializer(messages, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 class NotificationViewSet(viewsets.ModelViewSet):
-    queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
 
     def get_queryset(self):

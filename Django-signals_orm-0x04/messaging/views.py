@@ -7,6 +7,7 @@ from .serializers import UserSerializer, MessageSerializer, NotificationSerializ
 from rest_framework.response import Response
 from django.http import JsonResponse
 from .managers import UnreadMessagesManager
+from django.views.decorators.cache import cache_page
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -24,6 +25,11 @@ class MessageViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Message.objects.filter(sender=self.request.user)
+
+    @method_decorator(cache_page(60))
+    def get_conversation(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
 
     @action(detail=False, methods=['get'])
     def unread(self, request):

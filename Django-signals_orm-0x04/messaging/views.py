@@ -22,7 +22,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-    return Message.objects.filter(sender=self.request.user)
+        return Message.objects.filter(sender=self.request.user).select_related('sender', 'receiver').prefetch_related('replies')
 
 
 class NotificationViewSet(viewsets.ModelViewSet):

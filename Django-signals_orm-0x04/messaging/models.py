@@ -8,6 +8,7 @@ class Message(models.Model):
     content = models.TextField()
     edited = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
+    parent_message = models.ForeignKey(self, on_delete=CASCADE, null=True, blank=True, related_name='replies')
 
     class Meta:
         ordering = ['-timestamp'] # To return new messages first during querying

@@ -6,7 +6,7 @@ from .models import Message, Notification, MessageHistory
 from .serializers import UserSerializer, MessageSerializer, NotificationSerializer, MessageHistorySerializer
 from rest_framework.response import Response
 from django.http import JsonResponse
-from django.db import models
+from .managers import UnreadMessagesManager
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -27,19 +27,15 @@ class MessageViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def unread(self, request):
-        messages = Message.unread.for_user(request.user).only('sender_id', 'content', 'timestamp').select_related('sender')
-        serializer = self.get_serializer(messages, many=True)
+        unread_messages = Message.unread.unread_for_user(request.user).only('sender_id', 'content', 'timestamp').select_related('sender')
+        serializer = self.get_serializer(unread_messages, many=True)
         return Response(serializer.data)
 
-@action(detail=False, methods=['get'])
-def inbox(request):
-        messages = Message.objects.filter(sender=request.user).select_related('sender', 'receiver').prefetch_related('replies')
-        serializer = MessageSerializer(messages, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-class UnreadMessagesManager(models.Manager):
-    def for_user(self, user):
-        return self.filter(receiver=user, is_read=False)
+    @action(detail=False, methods=['get'])
+    def inbox(request):
+            messages = Message.objects.filter(sender=request.user).select_related('sender', 'receiver').prefetch_related('replies')
+            serializer = MessageSerializer(messages, many=True)
+            return JsonResponse(serializer.data, safe=False)
 
 
 class NotificationViewSet(viewsets.ModelViewSet):

@@ -1,0 +1,39 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# Virtual environments
+venv/
+env/
+
+# Git & version control
+.git/
+.gitignore
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE/editor stuff
+.vscode/
+.idea/
+
+# Environment files
+.env
+*.env
+
+# Docker leftovers
+*.pid
+*.tar
+*.swp
+
+# Test and coverage files
+.coverage
+htmlcov/
+
+# Static build artifacts (optional, if built separately)
+staticfiles/

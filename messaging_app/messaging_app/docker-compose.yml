@@ -4,7 +4,10 @@ services:
   web:
     build: .
     container_name: messaging_app
-    command: sh -c "sleep 10 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "sleep 10 &&
+      python3 manage.py migrate &&
+      python3 manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/app
     ports:
@@ -19,12 +22,12 @@ services:
     container_name: messaging_app_db
     restart: always
     environment:
-      MYSQL_DATABASE: messaging_db
-      MYSQL_USER: messaging_user
-      MYSQL_PASSWORD: messaging_pass
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: rootpass
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
 

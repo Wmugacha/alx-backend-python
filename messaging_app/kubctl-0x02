@@ -3,3 +3,10 @@
 kubectl apply -f blue_deployment.yaml
 
 kubectl apply -f green_deployment.yaml
+
+while true; do
+  curl -s -o /dev/null -w "%{http_code} - %{time_total}s\n" http://127.0.0.1:38335
+  sleep 1
+done
+
+kubectl get pods

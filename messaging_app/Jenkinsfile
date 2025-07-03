@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.11'
+            args '-u root'
+        }
+    }
 
     environment {
         VENV = "venv"
@@ -38,7 +43,7 @@ pipeline {
 
         stage('Publish Report') {
             steps {
-                junit 'messaging_app/../report.xml'
+                junit '../report.xml'
             }
         }
     }

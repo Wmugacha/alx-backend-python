@@ -16,14 +16,10 @@ pipeline {
             steps {
                 dir('messaging_app') {
                     sh '''
-                         python3 -m venv venv
-
-                        # Ensure pip is installed in the virtualenv
+                        python3 -m venv venv
                         ./venv/bin/python -m ensurepip --upgrade
-
-                        # install dependencies
                         ./venv/bin/python -m pip install --upgrade pip
-                        ./venv/bin/pip install -r requirements.txt
+                        ./venv/bin/python -m pip install -r requirements.txt
                     '''
                 }
             }

@@ -8,33 +8,37 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/Wmugacha/alx-backend-python/tree/main/messaging_app'
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/Wmugacha/alx-backend-python.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    python3 -m venv $VENV
-                    . $VENV/bin/activate
-                    pip3 install --upgrade pip
-                    pip3 install -r messaging_app/requirements.txt
-                '''
+                dir('messaging_app') {
+                    sh '''
+                        python3 -m venv $VENV
+                        . $VENV/bin/activate
+                        pip3 install --upgrade pip
+                        pip3 install -r requirements.txt
+                    '''
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '''
-                    . $VENV/bin/activate
-                    pytest --junitxml=report.xml
-                '''
+                dir('messaging_app') {
+                    sh '''
+                        . $VENV/bin/activate
+                        pytest --junitxml=../report.xml
+                    '''
+                }
             }
         }
 
         stage('Publish Report') {
             steps {
-                junit 'report.xml'
+                junit 'messaging_app/../report.xml'
             }
         }
     }

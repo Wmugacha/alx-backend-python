@@ -61,6 +61,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run Flake8 Linting
+        working-directory: messaging_app
+        run: |
+          flake8 . --max-line-length=127
+
       - name: Run migrations
         working-directory: messaging_app
         run: |
@@ -70,4 +75,10 @@ jobs:
       - name: Run tests
         working-directory: messaging_app
         run: |
-          pytest
+          pytest --cov=. --cov-report=xml
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: messaging_app/coverage.xml

@@ -3,6 +3,9 @@ pipeline {
 
     environment {
         VENV = "venv"
+        IMAGE_NAME = 'Wmugacha/messaging-app'
+        TAG = "${new Date().format('yyyyMMddHHmmss')}"
+        DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
     }
 
     stages {
@@ -36,6 +39,26 @@ pipeline {
         stage('Publish Report') {
             steps {
                 junit 'report.xml'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                dir('messaging_app') {
+                    sh 'docker build -t $IMAGE_NAME:$TAG .'
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker push $IMAGE_NAME:$TAG
+                        docker logout
+                    '''
+                }
             }
         }
     }
